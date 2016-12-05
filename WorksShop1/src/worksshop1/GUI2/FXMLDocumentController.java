@@ -7,12 +7,15 @@ package worksshop1.GUI2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import worksshop_1.Building;
 import worksshop_1.BuildingSystem;
 
 /**
@@ -21,7 +24,8 @@ import worksshop_1.BuildingSystem;
  */
 public class FXMLDocumentController implements Initializable {
     
-    BuildingSystem buildings = new BuildingSystem();
+    BuildingSystem bs;
+    ObservableList<Building> allBuildings;
     
     @FXML
     private ListView<?> BuildingList;
@@ -45,6 +49,11 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        bs  = new BuildingSystem();
+        bs.createSomeStuff();
+        allBuildings = FXCollections.observableArrayList();
+        
         
         
     }    

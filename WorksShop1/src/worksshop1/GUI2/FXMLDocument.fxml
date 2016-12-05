@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="648.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workshop.pkg1.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="648.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worksshop1.GUI2.FXMLDocumentController">
    <children>
       <SplitPane dividerPositions="0.296875" prefHeight="648.0" prefWidth="898.0">
         <items>
