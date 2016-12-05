@@ -50,7 +50,7 @@ public class BuildingSystem {
         buildings.add(building2);
         
         building1.readAllMeasurements();
-        //building2.printAllMeasurements();
+        building2.readAllMeasurements();
         
     }
     

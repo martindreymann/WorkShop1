@@ -15,6 +15,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import worksshop_1.Building;
 import worksshop_1.BuildingSystem;
 
@@ -23,12 +24,12 @@ import worksshop_1.BuildingSystem;
  * @author Daniel
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     BuildingSystem bs;
     ObservableList<Building> allBuildings;
-    
+
     @FXML
-    private ListView<?> BuildingList;
+    private ListView<Building> BuildingList;
     @FXML
     private Button AllButton;
     @FXML
@@ -41,21 +42,40 @@ public class FXMLDocumentController implements Initializable {
     private TextArea tempText;
     @FXML
     private LineChart<?, ?> HisGraph;
-    
-    
-   @FXML
-   private void handlebutton(){}
-    
-    
+
+    @FXML
+    private void handlebutton() {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        bs  = new BuildingSystem();
+
+        bs = new BuildingSystem();
         bs.createSomeStuff();
-        allBuildings = FXCollections.observableArrayList();
-        
-        
-        
-    }    
-    
+        allBuildings = FXCollections.observableArrayList(bs.getAllBuildings());
+        BuildingList.setItems(allBuildings);
+
+    }
+
+    @FXML
+    private void inventoryOnClick(MouseEvent event) {
+
+        // double click to drop item from inventory to current room
+        if (event.getClickCount() == 2 && BuildingList.getSelectionModel().getSelectedItem() != null) {
+            Building clickedBuilding = BuildingList.getSelectionModel().getSelectedItem();
+            
+            tempText.clear();
+            for (String s : clickedBuilding.getTemperature()) {
+                tempText.appendText(s);
+            }
+            
+            AirText.clear();
+            for (String s : clickedBuilding.getAirQuality()) {
+                AirText.appendText(s);
+            }
+            
+        }
+
+    }
+
 }

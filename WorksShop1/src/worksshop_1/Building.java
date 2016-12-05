@@ -52,7 +52,7 @@ public class Building {
         ArrayList<String> rList = new ArrayList<>();
 
         for (Measurement m : aqMeasure) {
-            rList.add("Sensor:" + m.getCensorName() + " | Measure: " + m.getMeasure() + " CO2");
+            rList.add( m.getCensorName() + ": " + m.getMeasure() + " CO2\n");
         }
         return rList;
     }
@@ -62,7 +62,8 @@ public class Building {
         ArrayList<String> rList = new ArrayList<>();
 
         for (Measurement m : tempMeasure) {
-            rList.add("Sensor:" + m.getCensorName() + " | Measure: " + m.getMeasure() + " celcius");
+            
+            rList.add(m.getCensorName() + ": " + m.getMeasure() + " celcius\n");
         }
         return rList;
     }
@@ -78,6 +79,11 @@ public class Building {
         }
         
         return rArray;
+    }
+    
+    @Override
+    public String toString(){
+        return name;
     }
 
 }
