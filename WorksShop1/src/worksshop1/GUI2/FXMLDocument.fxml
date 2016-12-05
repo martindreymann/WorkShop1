@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="648.0" prefWidth="898.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workshop.pkg1.FXMLDocumentController">
+   <children>
+      <SplitPane dividerPositions="0.296875" prefHeight="648.0" prefWidth="898.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="273.0">
+               <children>
+                  <ListView fx:id="BuildingList" layoutX="10.0" layoutY="96.0" prefHeight="454.0" prefWidth="241.0" />
+                  <Label layoutX="94.0" layoutY="53.0" text="Buildings" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="573.0">
+               <children>
+                  <Button fx:id="AllButton" layoutX="376.0" layoutY="226.0" mnemonicParsing="false" text="All Measurements" />
+                  <Button fx:id="TempButton" layoutX="376.0" layoutY="157.0" mnemonicParsing="false" text="Temperature" />
+                  <Button fx:id="AirButton" layoutX="376.0" layoutY="96.0" mnemonicParsing="false" text="Air Quality" />
+                  <TextArea fx:id="AirText" layoutX="40.0" layoutY="96.0" prefHeight="182.0" prefWidth="146.0" />
+                  <TextArea fx:id="tempText" layoutX="202.0" layoutY="96.0" prefHeight="182.0" prefWidth="146.0" />
+                  <Label layoutX="71.0" layoutY="60.0" text="Air Quality" />
+                  <Label layoutX="224.0" layoutY="60.0" text="Temperature" />
+                  <LineChart fx:id="HisGraph" layoutX="27.0" layoutY="338.0" prefHeight="286.0" prefWidth="571.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <Label layoutX="107.0" layoutY="310.0" text="Measurement History" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

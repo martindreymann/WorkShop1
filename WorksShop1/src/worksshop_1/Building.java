@@ -1,4 +1,4 @@
-package worksshop1;
+package worksshop_1;
 
 import java.util.ArrayList;
 import javafx.util.Pair;
@@ -67,13 +67,17 @@ public class Building {
         return rList;
     }
     
-    public int[][] getTempGraph(){
+    public double[][] getTempGraph(){
         
-        for (Measurement m : tempMeasure){
-            
+        int range = tempMeasure.size();
+        double[][] rArray = new double[range][2];
+        
+        for (int i = 0; i < tempMeasure.size() ; i++){
+            rArray[i][0] = i;
+            rArray[i][1] = tempMeasure.get(i).getMeasure();
         }
         
-        return null;
+        return rArray;
     }
 
 }

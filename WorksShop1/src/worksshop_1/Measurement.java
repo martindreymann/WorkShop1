@@ -1,5 +1,5 @@
 
-package worksshop1;
+package worksshop_1;
 
 import java.text.DecimalFormat;
 import java.util.Date;

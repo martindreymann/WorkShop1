@@ -1,5 +1,5 @@
 
-package worksshop1;
+package worksshop_1;
 
 public abstract class Sensors {
     

@@ -1,4 +1,4 @@
-package worksshop1;
+package worksshop_1;
 
 import java.util.Date;
 

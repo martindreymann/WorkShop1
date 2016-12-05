@@ -1,5 +1,5 @@
 
-package worksshop1;
+package worksshop_1;
 
 import java.util.ArrayList;
 
@@ -29,11 +29,8 @@ public class BuildingSystem {
         return null;
     }
     
-    public void printBuildings(){
-        System.out.println("Buildings registered:");
-        for (Building b : buildings){
-            System.out.println(b.getName());
-        }
+    public ArrayList<Building> getAllBuildings(){
+        return buildings;
     }
     
     public void createSomeStuff(){
@@ -52,7 +49,7 @@ public class BuildingSystem {
         buildings.add(building1);
         buildings.add(building2);
         
-        //building1.readAllMeasurements();
+        building1.readAllMeasurements();
         //building2.printAllMeasurements();
         
     }
