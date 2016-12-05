@@ -1,6 +1,7 @@
 package worksshop1;
 
 import java.util.ArrayList;
+import javafx.util.Pair;
 
 public class Building {
 
@@ -15,52 +16,64 @@ public class Building {
         this.adress = adress;
         tempMeasure = new ArrayList<>();
         aqMeasure = new ArrayList<>();
-        
 
         for (Sensors s : sensorses) {
             sensorList.add(s);
         }
     }
-    
-    public void readAllMeasurements(){
-        for(Sensors s : sensorList){
-            
-            if(s instanceof TemperatureSensor)
+
+    public void readAllMeasurements() {
+        for (Sensors s : sensorList) {
+
+            if (s instanceof TemperatureSensor) {
                 tempMeasure.add(s.getCurrentMeasure());
-            else if(s instanceof AirQualitySensor)
+            } else if (s instanceof AirQualitySensor) {
                 aqMeasure.add(s.getCurrentMeasure());
-            else
-                System.out.println("OMFG");   
+            } else {
+                System.out.println("OMFG");
+            }
         }
     }
-    
-    public void addSensor(Sensors s){
+
+    public void addSensor(Sensors s) {
         sensorList.add(s);
     }
-    
-    public void removeSensor(Sensors s){
+
+    public void removeSensor(Sensors s) {
         sensorList.remove(s);
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    
-    public void printAllMeasurements(){
-        
-        System.out.println("\nAir Quality measurements:");
+
+    public ArrayList<String> getAirQuality() {
+
+        ArrayList<String> rList = new ArrayList<>();
+
         for (Measurement m : aqMeasure) {
-            System.out.println("Sensor:" +m.getCensorName()+" | Measure: " + m.getMeasure() +" CO2");
+            rList.add("Sensor:" + m.getCensorName() + " | Measure: " + m.getMeasure() + " CO2");
         }
-        System.out.println("\nTemperature measurements:");
+        return rList;
+    }
+
+    public ArrayList<String> getTemperature() {
+
+        ArrayList<String> rList = new ArrayList<>();
+
         for (Measurement m : tempMeasure) {
-            System.out.println("Sensor:" +m.getCensorName()+" | Measure: " + m.getMeasure()+" celcius");
+            rList.add("Sensor:" + m.getCensorName() + " | Measure: " + m.getMeasure() + " celcius");
         }
-        
+        return rList;
     }
     
-    
-    
-    
+    public int[][] getTempGraph(){
+        
+        for (Measurement m : tempMeasure){
+            
+        }
+        
+        return null;
+    }
 
 }
