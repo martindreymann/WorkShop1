@@ -35,22 +35,24 @@ public class BuildingSystem {
         return buildings;
     }
     
-    public Map<String, Double> getChartData(Building building){
+    public Map<String, Double> getAQdata(Building building){
         int index = buildings.indexOf(building);
-        return buildings.get(index).getChartData();   
+        return buildings.get(index).getAQdata();   
     }
+    
+    
     
     public void createSomeStuff(){
         
-        AirQualitySensor aq1 = new AirQualitySensor("AQsensor1");
+        AirQualitySensor standardAQsensor = new AirQualitySensor("StandardAQsensor");
         AirQualitySensor aq2 = new AirQualitySensor("AQsensor2");
         AirQualitySensor aq3 = new AirQualitySensor("AQsensor3");
         
-        TemperatureSensor t1 = new TemperatureSensor("TSensor1");
+        TemperatureSensor standardTempSensor = new TemperatureSensor("standardTempSensor");
         TemperatureSensor t2 = new TemperatureSensor("TSensor2");
         TemperatureSensor t3 = new TemperatureSensor("TSensor3");
         
-        Building building1 = new Building("SDU", "Somewhere", aq1, aq2, t1, t2);
+        Building building1 = new Building("SDU", "Somewhere", standardAQsensor, aq2, standardTempSensor, t2);
         Building building2 = new Building("DinMor", "HosDinMor", aq3, t3);
         
         buildings.add(building1);

@@ -15,9 +15,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import worksshop_1.Building;
 import worksshop_1.BuildingSystem;
@@ -37,22 +40,46 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button AllButton;
     @FXML
-    private Button TempButton;
-    @FXML
-    private Button AirButton;
-    @FXML
     private TextArea AirText;
     @FXML
     private TextArea tempText;
     @FXML
     private LineChart<String, Double> HisGraph;
+    @FXML
+    private TextField addCO2Measure;
+    @FXML
+    private TextField addTempMeasure;
+    @FXML
+    private Button saveMeasureButton;
 
     @FXML
     private void handleReadMeasurements(ActionEvent e) {
+
         if (clickedBuilding != null) {
             clickedBuilding.readAllMeasurements();
             updateLineChart();
         }
+    }
+
+    @FXML
+    private void saveNewMeasurementHandler(ActionEvent e) {
+
+        try {
+            if (clickedBuilding != null) {
+                double co2 = Double.parseDouble(addCO2Measure.getText());
+                double temp = Double.parseDouble(addTempMeasure.getText());
+
+                clickedBuilding.addNewMeasure(temp, co2);
+
+                addCO2Measure.clear();
+                addTempMeasure.clear();
+                updateLineChart();
+            }
+
+        } catch (NumberFormatException nfe) {
+            errorMessage();
+        }
+
     }
 
     @Override
@@ -90,14 +117,30 @@ public class FXMLDocumentController implements Initializable {
 
     private void updateLineChart() {
         HisGraph.getData().clear();
+
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("CO2");
-        Map<String, Double> map = clickedBuilding.getChartData();
-        for (String s : clickedBuilding.getChartData().keySet()) {
-            series1.getData().add(new XYChart.Data(s, map.get(s)));
-
+        Map<String, Double> map1 = clickedBuilding.getAQdata();
+        for (String s : clickedBuilding.getAQdata().keySet()) {
+            series1.getData().add(new XYChart.Data(s, map1.get(s)));
         }
-        HisGraph.getData().add(series1);
+
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("C");
+        Map<String, Double> map2 = clickedBuilding.getTdata();
+        for (String s : clickedBuilding.getTdata().keySet()) {
+            series2.getData().add(new XYChart.Data(s, map2.get(s)));
+        }
+
+        HisGraph.getData().addAll(series1, series2);
+    }
+    
+    private void errorMessage(){
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Oh you didnt!");
+        alert.setHeaderText("You really fucked up...");
+        alert.setContentText("You didn't enter a number you piece of shit!");
+        alert.showAndWait();
     }
 
 }

@@ -19,13 +19,11 @@
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="573.0">
           <children>
-            <Button fx:id="AllButton" layoutX="376.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleReadMeasurements" text="All Measurements" />
-            <Button fx:id="TempButton" layoutX="376.0" layoutY="157.0" mnemonicParsing="false" text="Temperature" />
-            <Button fx:id="AirButton" layoutX="376.0" layoutY="96.0" mnemonicParsing="false" text="Air Quality" />
-            <TextArea fx:id="AirText" layoutX="40.0" layoutY="96.0" prefHeight="182.0" prefWidth="146.0" />
-            <TextArea fx:id="tempText" layoutX="202.0" layoutY="96.0" prefHeight="182.0" prefWidth="146.0" />
-            <Label layoutX="71.0" layoutY="60.0" text="Air Quality" />
-            <Label layoutX="224.0" layoutY="60.0" text="Temperature" />
+            <Button fx:id="AllButton" layoutX="113.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleReadMeasurements" text="Generate measurements" />
+            <TextArea fx:id="AirText" layoutX="20.0" layoutY="68.0" prefHeight="182.0" prefWidth="146.0" />
+            <TextArea fx:id="tempText" layoutX="182.0" layoutY="68.0" prefHeight="182.0" prefWidth="146.0" />
+            <Label layoutX="51.0" layoutY="32.0" text="Air Quality" />
+            <Label layoutX="204.0" layoutY="32.0" text="Temperature" />
             <LineChart fx:id="HisGraph" layoutX="27.0" layoutY="338.0" prefHeight="286.0" prefWidth="571.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
@@ -34,7 +32,12 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </LineChart>
-            <Label layoutX="107.0" layoutY="310.0" text="Measurement History" />
+            <Label layoutX="68.0" layoutY="330.0" text="Measurement History" />
+            <TextField id="addCO2measure" fx:id="addCO2Measure" layoutX="366.0" layoutY="82.0" prefWidth="107.0" promptText="Type something" />
+            <TextField fx:id="addTempMeasure" layoutX="366.0" layoutY="126.0" prefWidth="107.0" promptText="Type something" />
+            <Label layoutX="366.0" layoutY="66.0" text="CO2" />
+            <Label layoutX="366.0" layoutY="110.0" text="Temperature C" />
+            <Button fx:id="saveMeasureButton" layoutX="366.0" layoutY="159.0" mnemonicParsing="false" onAction="#saveNewMeasurementHandler" text="Save this shit" />
           </children>
         </AnchorPane>
       </items>
