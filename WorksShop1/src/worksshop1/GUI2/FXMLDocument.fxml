@@ -19,7 +19,7 @@
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="573.0">
           <children>
-            <Button fx:id="AllButton" layoutX="376.0" layoutY="226.0" mnemonicParsing="false" text="All Measurements" />
+            <Button fx:id="AllButton" layoutX="376.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleReadMeasurements" text="All Measurements" />
             <Button fx:id="TempButton" layoutX="376.0" layoutY="157.0" mnemonicParsing="false" text="Temperature" />
             <Button fx:id="AirButton" layoutX="376.0" layoutY="96.0" mnemonicParsing="false" text="Air Quality" />
             <TextArea fx:id="AirText" layoutX="40.0" layoutY="96.0" prefHeight="182.0" prefWidth="146.0" />

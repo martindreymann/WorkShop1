@@ -1,6 +1,8 @@
 package worksshop_1;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import javafx.util.Pair;
 
 public class Building {
@@ -45,6 +47,16 @@ public class Building {
 
     public String getName() {
         return name;
+    }
+    
+    public Map<String, Double> getChartData(){
+        Map<String, Double> returnMap = new TreeMap<>();
+        
+        for (Measurement m : aqMeasure){
+            returnMap.put(m.getDate().toString() ,  m.getMeasure());
+        }
+        
+        return returnMap;
     }
 
     public ArrayList<String> getAirQuality() {

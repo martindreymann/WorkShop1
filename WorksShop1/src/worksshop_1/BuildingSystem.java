@@ -2,6 +2,8 @@
 package worksshop_1;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class BuildingSystem {
     
@@ -31,6 +33,11 @@ public class BuildingSystem {
     
     public ArrayList<Building> getAllBuildings(){
         return buildings;
+    }
+    
+    public Map<String, Double> getChartData(Building building){
+        int index = buildings.indexOf(building);
+        return buildings.get(index).getChartData();   
     }
     
     public void createSomeStuff(){
