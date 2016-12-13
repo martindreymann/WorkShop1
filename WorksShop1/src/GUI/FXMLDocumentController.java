@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package worksshop1.GUI2;
+package GUI;
 
 import java.net.URL;
 import java.util.Map;
@@ -22,8 +22,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import worksshop_1.Building;
-import worksshop_1.BuildingSystem;
+import business.Building;
+import business.BuildingSystem;
+import business.FileHandler;
+import business.SensorType;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,6 +39,7 @@ public class FXMLDocumentController implements Initializable {
     BuildingSystem bs;
     ObservableList<Building> allBuildings;
     Building clickedBuilding = null;
+    FileHandler fh;
 
     @FXML
     private ListView<Building> BuildingList;
@@ -51,6 +57,10 @@ public class FXMLDocumentController implements Initializable {
     private TextField addTempMeasure;
     @FXML
     private Button saveMeasureButton;
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Button loadButton;
 
     @FXML
     private void handleReadMeasurements(ActionEvent e) {
@@ -63,7 +73,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void saveNewMeasurementHandler(ActionEvent e) {
-
+        //NOT IMPLEMENTED YET IN "Building"-class!
         try {
             if (clickedBuilding != null) {
                 double co2 = Double.parseDouble(addCO2Measure.getText());
@@ -85,10 +95,12 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        bs = new BuildingSystem();
-        bs.createSomeStuff();
-        allBuildings = FXCollections.observableArrayList(bs.getAllBuildings());
-        BuildingList.setItems(allBuildings);
+        try {
+            fh = new FileHandler();
+        } catch (IOException ex) {
+            System.out.println("Shit happened. Call your lawyer.");
+        }
+        
 
     }
 
@@ -100,14 +112,10 @@ public class FXMLDocumentController implements Initializable {
             clickedBuilding = BuildingList.getSelectionModel().getSelectedItem();
 
             tempText.clear();
-            for (String s : clickedBuilding.getTemperature()) {
-                tempText.appendText(s);
-            }
+            tempText.setText("Not implemented. LineChart much cooler!");
 
             AirText.clear();
-            for (String s : clickedBuilding.getAirQuality()) {
-                AirText.appendText(s);
-            }
+            AirText.setText("Not implemented. Cause.. ");
 
             updateLineChart();
 
@@ -120,27 +128,50 @@ public class FXMLDocumentController implements Initializable {
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("CO2");
-        Map<String, Double> map1 = clickedBuilding.getAQdata();
-        for (String s : clickedBuilding.getAQdata().keySet()) {
+        Map<String, Double> map1 = clickedBuilding.getLineChartData(SensorType.CO2);
+        for (String s : map1.keySet()) {
             series1.getData().add(new XYChart.Data(s, map1.get(s)));
         }
 
         XYChart.Series series2 = new XYChart.Series();
         series2.setName("C");
-        Map<String, Double> map2 = clickedBuilding.getTdata();
-        for (String s : clickedBuilding.getTdata().keySet()) {
+        Map<String, Double> map2 = clickedBuilding.getLineChartData(SensorType.TEMPERATURE);
+        for (String s : map2.keySet()) {
             series2.getData().add(new XYChart.Data(s, map2.get(s)));
         }
 
         HisGraph.getData().addAll(series1, series2);
     }
-    
-    private void errorMessage(){
+
+    private void errorMessage() {
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Oh you didnt!");
         alert.setHeaderText("You really fucked up...");
         alert.setContentText("You didn't enter a number you piece of shit!");
         alert.showAndWait();
+    }
+
+    @FXML
+    private void handleSaveButton(ActionEvent e) {
+        try {
+            fh.saveFile(bs);
+        } catch (IOException ex) {
+            System.out.println("Oh fuck, didn't save properly");
+        }
+    }
+
+    @FXML
+    private void handleLoadButton(ActionEvent e) {
+        try {
+            bs = fh.loadFile();
+            allBuildings = FXCollections.observableArrayList(bs.getAllBuildings());
+            BuildingList.setItems(allBuildings);
+
+        } catch (IOException ex) {
+            System.out.println("Nope, couldn't read it.");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Well, could read it. But it didn't work.");
+        }
     }
 
 }
